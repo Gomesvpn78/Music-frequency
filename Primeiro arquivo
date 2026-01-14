@@ -1,0 +1,40 @@
+app/page.js
+'use client'
+
+import { useState } from 'react'
+
+const musicData = {
+  '432': [{ title: 'Music 432 Hz', url: 'https://www.youtube.com/results?search_query=432hz+music' }],
+  '528': [{ title: 'Music 528 Hz', url: 'https://www.youtube.com/results?search_query=528hz+music' }],
+  '639': [{ title: 'Music 639 Hz', url: 'https://www.youtube.com/results?search_query=639hz+music' }],
+  '741': [{ title: 'Music 741 Hz', url: 'https://www.youtube.com/results?search_query=741hz+music' }],
+  '852': [{ title: 'Music 852 Hz', url: 'https://www.youtube.com/results?search_query=852hz+music' }],
+  '963': [{ title: 'Music 963 Hz', url: 'https://www.youtube.com/results?search_query=963hz+music' }]
+}
+
+export default function Home() {
+  const [hz, setHz] = useState('')
+
+  return (
+    <main style={{ minHeight: '100vh', background: '#0f0f0f', color: '#fff', padding: 20 }}>
+      <h1>Music Frequency Search</h1>
+      <input
+        placeholder="Ex: 432"
+        value={hz}
+        onChange={(e) => setHz(e.target.value)}
+        style={{ padding: 10, marginTop: 10, width: '100%' }}
+      />
+
+      <div style={{ marginTop: 20 }}>
+        {musicData[hz]?.map((m, i) => (
+          <div key={i}>
+            <p>{m.title}</p>
+            <a href={m.url} target="_blank">Ouvir no YouTube</a>
+          </div>
+        ))}
+
+        {hz && !musicData[hz] && <p>Nenhuma música encontrada</p>}
+      </div>
+    </main>
+  )
+}
